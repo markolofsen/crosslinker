@@ -6,22 +6,16 @@ import random
 
 class PySeoHtml:
     def __init__(self, html_text, keywords, max_link_length=500, random_links=False):
-        # Initialize the PySeoHtml with HTML text and keywords to link to
-
         self.html_text = html_text
         self.keywords = {keyword.lower(): link for keyword,
                          link in keywords.items()}
+        self.keyword_dict = {}  # Словарь для хранения ключевых слов и их идентификаторов
         self.tokenizer = WordPunctTokenizer()
-        self.punctuation = r'[.!?,:;]'
-
-        # Maximum length of a linked text snippet
         self.max_link_length = max_link_length
-
         seed = None if random_links else 42
         self.random_generator = random.Random(seed)
 
     def process_text(self):
-
         # Normalize the HTML
         soup = BeautifulSoup(self.html_text, 'html.parser')
         html_text = soup.prettify()
@@ -29,7 +23,7 @@ class PySeoHtml:
         # Create a BeautifulSoup object to parse the HTML
         soup = BeautifulSoup(html_text, 'html.parser')
 
-        paragraphs = soup.find_all('p')  # Find all paragraphs in the HTML
+        paragraphs = soup.find_all('p')  # Находим все абзацы в HTML
 
         for paragraph in paragraphs:
             paragraph_text = paragraph.get_text()
@@ -37,10 +31,7 @@ class PySeoHtml:
 
             new_tokens = []
 
-            i = 0
-            while i < len(tokens):
-                token = tokens[i]
-
+            for token in tokens:
                 matched_keyword = None
                 for keyword, link in self.keywords.items():
                     if keyword in token.lower():
@@ -50,47 +41,16 @@ class PySeoHtml:
                 if matched_keyword:
                     link = self.keywords[matched_keyword]
 
-                    neighbor_tokens = [token]
-                    left_count = 0
-                    right_count = 0
+                    # Генерируем уникальный идентификатор для ключевого слова
+                    keyword_id = f'__id{len(self.keyword_dict) + 1}__'
 
-                    j = i - 1
-                    while j >= 0:
-                        if re.match(self.punctuation, tokens[j]):
-                            break
-                        left_count += 1
-                        neighbor_tokens.insert(0, tokens[j])
-                        j -= 1
-                        if left_count >= 2:
-                            break
+                    # Добавляем ключевое слово и его идентификатор в словарь
+                    self.keyword_dict[keyword_id] = (token, link)
 
-                    j = i + 1
-                    while j < len(tokens):
-                        if re.match(self.punctuation, tokens[j]):
-                            break
-                        right_count += 1
-                        neighbor_tokens.append(tokens[j])
-                        j += 1
-                        if right_count >= 2:
-                            break
+                    # Заменяем ключевое слово на его идентификатор
+                    token = keyword_id
 
-                    if left_count <= 2 and right_count <= 2:
-                        neighbor_text = ' '.join(neighbor_tokens)
-                        if neighbor_text.endswith(('.', '!', '?', ',')):
-                            neighbor_text = neighbor_text[:-
-                                                          1] + f'</a>{neighbor_text[-1]}'
-                        else:
-                            neighbor_text += '</a>'
-                        new_tokens.append(
-                            f'<a href="{link}">{neighbor_text}')
-                        i += left_count + right_count
-                    else:
-                        new_tokens.append(f'<a href="{link}">{token}')
-
-                else:
-                    new_tokens.append(token)
-
-                i += 1
+                new_tokens.append(token)
 
             # Join tokens back into text and replace the paragraph content
             paragraph_text = ' '.join(new_tokens)
@@ -101,6 +61,8 @@ class PySeoHtml:
 
         # Remove extra spaces before punctuation
         processed_html = re.sub(r'\s+([.!?,:;])', r'\1', processed_html)
+
+        processed_html = self.post_process_text(processed_html)
 
         # Find all <a> tags in the processed HTML
         all_a_tags = re.findall(r'<a[^>]*>.*?</a>', processed_html)
@@ -118,5 +80,13 @@ class PySeoHtml:
                 tag_contents = re.search(r'>(.*?)</a>', tag_to_remove).group(1)
                 processed_html = processed_html.replace(
                     tag_to_remove, tag_contents, 1)
+
+        return processed_html
+
+    def post_process_text(self, processed_html):
+        for keyword_id, (keyword, link) in self.keyword_dict.items():
+
+            replace = f'<a href="{link}">{keyword}</a>'
+            processed_html = processed_html.replace(keyword_id, replace)
 
         return processed_html
