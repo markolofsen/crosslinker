@@ -1,18 +1,19 @@
 from PySeoHtml import PySeoHtml
 
+# Initialize the PySeoHtml with your HTML text and keywords
 html_text = """
-<p>By purchasing this exceptional villa at Apes Hill, you gain access to a world - class golf resort community where timeless elegance meets unparalleled beauty. Spanning 475 acres, Apes Hill offers an impressive collection of amenities, including the renowned 18 - hole championship golf course designed by Ron Kirby, health club, nature trails, padel courts, and tennis courts.</p>
-<p>Additionally, the beautiful beaches, galleries, restaurants, and museums of Holetown are just a short drive away, providing endless opportunities for leisure and entertainment.</p>
-<p>Don' t miss out on the chance to embrace refined luxury living in Barbados. us today to make this exceptional villa your own!</p>
+<p>This is an example HTML text containing keywords like Python and SEO.</p>
+<p>
+    PySeoHtml is a versatile Python library created to empower SEO (Search Engine Optimization) strategies by strategically embedding hyperlinks into HTML text content. Its primary objective is to intelligently link designated keywords, thereby optimizing content for search engines while preserving readability and mitigating the risk of over-optimization. With a focus on enhancing online visibility, PySeoHtml allows users to define keywords and their respective target URLs, facilitating the process of integrating contextual links seamlessly.
+    By carefully analyzing the input HTML text, PySeoHtml identifies instances of specified keywords and intelligently transforms them into hyperlinks. To ensure a balanced and natural appearance, the library considers both the left and right context of keywords. It extracts adjacent words, taking care to respect sentence boundaries and avoid disruptions to the text's coherence.
+    PySeoHtml offers flexibility by allowing users to customize the link density, ensuring that the generated hyperlinks align with specific SEO objectives. This means you can control how often keywords are linked, preventing the text from becoming overly saturated with links, which can negatively impact user experience and SEO performance.
+</p>
 """
+keywords = {"python": "https://python.org", "seo": "https://seo-example.com"}
+linker = PySeoHtml(html_text, keywords, density=500, random_links=False)
 
-keywords = {
-    "barb": "https://ok.com",
-    # "roa": "https://road.com",
-}
+# Process the HTML text to add links to keywords
+processed_html = linker.process_text()
 
-processor = PySeoHtml(html_text, keywords, density=500)
-processed_text = processor.process_text()
-
-print('before', html_text)
-print('after', processed_text)
+# Use the processed_html in your web content
+print(processed_html)
