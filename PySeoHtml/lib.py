@@ -138,7 +138,9 @@ class PySeoHtml:
                             sentence_string += " " + words[right_idx]
                             right_idx += 1
 
-                        sentences.append([sentence_string, link])
+                        if len(sentence_string) > 4:
+                            sentences.append([sentence_string, link])
+
                         idx = right_idx
                         break
 
