@@ -60,10 +60,15 @@ class PySeoHtml:
         # Make sure the keywords are in the correct format
         keywords_groups = []
         for keyword, link in keywords:
-            if stemming:
-                keyword = self.stemmer.stem(keyword)
             keyword = keyword.lower().strip()
-            keywords_groups.append([keyword, link])
+            keyword_words = keyword.split(" ")
+            for word in keyword_words:
+                if len(word) > 3:
+                    if stemming:
+                        word = self.stemmer.stem(word)
+                    keywords_groups.append([word, link])
+
+        # print("keywords_groups", keywords_groups)
 
         self.keywords_groups = keywords_groups
         self.language = language
