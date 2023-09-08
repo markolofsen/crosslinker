@@ -152,8 +152,57 @@ class PySeoHtml:
                 if idx < len(words):
                     idx += 1
 
+        html_text = self._replace_sentences(sentences)
+
+        return self._pretty_html(html_text)
+
+    # def _peplace_sentences_inside_tags(self, sentences):
+
+    #     html_text = self.html_text
+
+    #     # Calculate the maximum allowed number of links in the text (not more than 1 per self.density characters)
+    #     max_links = len(html_text) // self.density
+
+    #     # Create a copy of the sentences list
+    #     sentences_to_replace = sentences.copy()
+
+    #     # Shuffle the sentences_to_replace list to select sentences randomly
+    #     self.random_generator.shuffle(sentences_to_replace)
+
+    #     # Initialize the link count
+    #     link_count = 0
+
+    #     # Create a regex pattern to match the content of valid tags
+    #     valid_tag_content_pattern = re.compile(
+    #         rf'(<({"|".join(self.valid_tags)}).*?>)(.*?)(<\/({"|".join(self.valid_tags)}).*?>)')
+
+    #     # Replace sentences in html_text with links, considering the maximum allowed number of links
+    #     for sentence in sentences_to_replace:
+    #         if link_count >= max_links:
+    #             break  # Exit the loop if the maximum number of links is reached
+
+    #         # Find the content of the tag containing the sentence
+    #         for match in valid_tag_content_pattern.finditer(html_text):
+    #             tag_content = match.group(0)
+
+    #             # Выполняем замену только внутри этого текста
+    #             tag_content_with_links = tag_content.replace(
+    #                 sentence[0], f'<a href="{sentence[1]}">{sentence[0]}</a>')
+
+    #             # Заменяем в исходной строке
+    #             html_text = html_text.replace(
+    #                 tag_content, tag_content_with_links)
+
+    #             link_count += 1
+
+    #     return html_text
+
+    def _replace_sentences(self, sentences):
+
+        html_text = self.html_text
+
         # Calculate the maximum allowed number of links in the text (not more than 1 per self.density characters)
-        max_links = len(self.html_text) // self.density
+        max_links = len(html_text) // self.density
 
         # Create a copy of the sentences list
         sentences_to_replace = sentences.copy()
@@ -164,30 +213,15 @@ class PySeoHtml:
         # Initialize the link count
         link_count = 0
 
-        # Create a regex pattern to match the content of valid tags
-        valid_tag_content_pattern = re.compile(
-            rf'(<({"|".join(self.valid_tags)}).*?>)(.*?)(<\/({"|".join(self.valid_tags)}).*?>)')
-
         # Replace sentences in html_text with links, considering the maximum allowed number of links
         for sentence in sentences_to_replace:
             if link_count >= max_links:
                 break  # Exit the loop if the maximum number of links is reached
+            html_text = html_text.replace(
+                sentence[0], f'<a href="{sentence[1]}">{sentence[0]}</a>')
+            link_count += 1
 
-            # Find the content of the tag containing the sentence
-            for match in valid_tag_content_pattern.finditer(self.html_text):
-                tag_content = match.group(0)
-
-                # Выполняем замену только внутри этого текста
-                tag_content_with_links = tag_content.replace(
-                    sentence[0], f'<a href="{sentence[1]}">{sentence[0]}</a>')
-
-                # Заменяем в исходной строке
-                self.html_text = self.html_text.replace(
-                    tag_content, tag_content_with_links)
-
-                link_count += 1
-
-        return self._pretty_html(self.html_text)
+        return html_text
 
     def _pretty_html(self, html_text):
         soup = BeautifulSoup(html_text, 'html.parser')
@@ -223,10 +257,10 @@ if "__main__" == __name__:
         html_text=html_text,
         keywords=keywords,
         density=500,
-        random_links=False,
+        random_links=True,
         stemming=False,
         language="english",
-        valid_tags=["li", "p", "h2", "h3", "h4", "h5", "h6"],
+        valid_tags=["li", "p", "h1", "h2", "h3", "h4", "h5", "h6"],
     )
 
     # Generate the processed HTML content
