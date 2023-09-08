@@ -154,7 +154,7 @@ class PySeoHtml:
 
         html_text = self._replace_sentences(sentences)
 
-        return self._pretty_html(html_text)
+        return self._valid_html(html_text)
 
     # def _peplace_sentences_inside_tags(self, sentences):
 
@@ -223,10 +223,10 @@ class PySeoHtml:
 
         return html_text
 
-    def _pretty_html(self, html_text):
+    def _valid_html(self, html_text):
         soup = BeautifulSoup(html_text, 'html.parser')
-        pretty_html = soup.prettify()
-        return pretty_html
+        # pretty_html = soup.prettify()
+        return str(soup)
 
 
 if "__main__" == __name__:
@@ -236,7 +236,7 @@ if "__main__" == __name__:
     <p>PySeoHtml is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve search engine rankings and increase organic traffic.</p>
     <p>Here are some examples of keywords you can link:</p>
     <ul>
-        <li>Search Engine Optimization</li>
+        <li>Search Engine Optimization here. And some more text</li>
         <li>Keyword Research</li>
         <li>On-Page SEO</li>
         <li>Link Building</li>
@@ -244,8 +244,8 @@ if "__main__" == __name__:
     """
 
     keywords = [
-        [["seo"], "https://example.com/seo"],
-        [["Search Engine Optimization"], "https://example.com/seo"],
+        # [["seo"], "https://example.com/seo"],
+        [["Search"], "https://example.com/seo"],
         # [["Keyword Research"], "https://example.com/keyword-research"],
         # [["On-Page SEO"], "https://example.com/on-page-seo"],
         # [["Link Building"], "https://example.com/link-building"],
