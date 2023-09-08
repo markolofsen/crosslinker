@@ -114,7 +114,7 @@ class PySeoHtml:
 
                     if word.lower().startswith(keyword.lower()):
                         found = True
-                        print(f"found! word: {word}, keyword: {keyword}")
+                        # print(f"found! word: {word}, keyword: {keyword}")
 
                     if found:
                         sentence_string = word
@@ -158,10 +158,9 @@ class PySeoHtml:
 
         # Initialize the link count
         link_count = 0
-        print(f"sentences: {sentences}")
+
         # Replace sentences in html_text with links, considering the maximum allowed number of links
         for sentence in sentences_to_replace:
-            print(f"sentence: {sentence}")
             if link_count >= max_links:
                 break  # Exit the loop if the maximum number of links is reached
             self.html_text = self.html_text.replace(
