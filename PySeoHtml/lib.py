@@ -65,8 +65,6 @@ class PySeoHtml:
                     keyword = self.stemmer.stem(keyword)
                 keywords_groups.append([keyword, link])
 
-        # print("keywords_groups", keywords_groups)
-
         self.keywords_groups = keywords_groups
         self.language = language
         self.valid_tags = valid_tags
@@ -98,8 +96,10 @@ class PySeoHtml:
 
         for text_node in text_nodes:
 
-            if text_node.parent.name not in self.valid_tags:
-                continue
+            # Check if the text node is inside a valid tag
+            inside_valid_tag = False
+            if text_node.parent.name in self.valid_tags:
+                inside_valid_tag = True
 
             # Tokenize the text into words
             words = word_tokenize(text_node)
@@ -116,7 +116,7 @@ class PySeoHtml:
                         found = True
                         # print(f"found! word: {word}, keyword: {keyword}")
 
-                    if found:
+                    if found and inside_valid_tag:
                         sentence_string = word
 
                         # Add neighboring words on the left (up to 3 or until punctuation) to the link
@@ -159,13 +159,28 @@ class PySeoHtml:
         # Initialize the link count
         link_count = 0
 
+        # Create a regex pattern to match the content of valid tags
+        valid_tag_content_pattern = re.compile(
+            rf'(<({"|".join(self.valid_tags)}).*?>)(.*?)(<\/({"|".join(self.valid_tags)}).*?>)')
+
         # Replace sentences in html_text with links, considering the maximum allowed number of links
         for sentence in sentences_to_replace:
             if link_count >= max_links:
                 break  # Exit the loop if the maximum number of links is reached
-            self.html_text = self.html_text.replace(
-                sentence[0], f'<a href="{sentence[1]}">{sentence[0]}</a>')
-            link_count += 1
+
+            # Find the content of the tag containing the sentence
+            for match in valid_tag_content_pattern.finditer(self.html_text):
+                tag_content = match.group(0)
+
+                # Выполняем замену только внутри этого текста
+                tag_content_with_links = tag_content.replace(
+                    sentence[0], f'<a href="{sentence[1]}">{sentence[0]}</a>')
+
+                # Заменяем в исходной строке
+                self.html_text = self.html_text.replace(
+                    tag_content, tag_content_with_links)
+
+                link_count += 1
 
         return self._pretty_html(self.html_text)
 
@@ -206,7 +221,7 @@ if "__main__" == __name__:
         random_links=False,
         stemming=False,
         language="english",
-        valid_tags=["li", "p", "h1", "h2", "h3", "h4", "h5", "h6"],
+        valid_tags=["li", "p", "h2", "h3", "h4", "h5", "h6"],
     )
 
     # Generate the processed HTML content
