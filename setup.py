@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 setup(
     name='py-seo-html',
-    version='1.0.7',
+    version='1.0.8',
     description="Python library for SEO-friendly HTML text processing and keyword linking",
     long_description=long_description,
     long_description_content_type="text/x-rst",
