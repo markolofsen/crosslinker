@@ -59,14 +59,11 @@ class PySeoHtml:
 
         # Make sure the keywords are in the correct format
         keywords_groups = []
-        for keyword, link in keywords:
-            keyword = keyword.lower().strip()
-            keyword_words = keyword.split(" ")
-            for word in keyword_words:
-                if len(word) > 3:
-                    if stemming:
-                        word = self.stemmer.stem(word)
-                    keywords_groups.append([word, link])
+        for group, link in keywords:
+            for keyword in group:
+                if stemming:
+                    keyword = self.stemmer.stem(keyword)
+                keywords_groups.append([keyword, link])
 
         # print("keywords_groups", keywords_groups)
 
@@ -191,10 +188,10 @@ if "__main__" == __name__:
     """
 
     keywords = [
-        ["Search Engine Optimization", "https://example.com/seo"],
-        ["Keyword Research", "https://example.com/keyword-research"],
-        ["On-Page SEO", "https://example.com/on-page-seo"],
-        ["Link Building", "https://example.com/link-building"],
+        [["Search Engine Optimization"], "https://example.com/seo"],
+        [["Keyword Research"], "https://example.com/keyword-research"],
+        [["On-Page SEO"], "https://example.com/on-page-seo"],
+        [["Link Building"], "https://example.com/link-building"],
         # Add more keyword-link pairs as needed
     ]
 

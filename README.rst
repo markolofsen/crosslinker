@@ -89,10 +89,10 @@ Example
     """
 
     keywords = [
-        ["Search Engine Optimization", "https://example.com/seo"],
-        ["Keyword Research", "https://example.com/keyword-research"],
-        ["On-Page SEO", "https://example.com/on-page-seo"],
-        ["Link Building", "https://example.com/link-building"],
+        [["Search Engine Optimization"], "https://example.com/seo"],
+        [["Keyword Research"], "https://example.com/keyword-research"],
+        [["On-Page SEO"], "https://example.com/on-page-seo"],
+        [["Link Building"], "https://example.com/link-building"],
         # Add more keyword-link pairs as needed
     ]
 

@@ -81,10 +81,10 @@ html_text = """
 """
 
 keywords = [
-    ["Search Engine", "https://example.com/seo"],
-    ["Research", "https://example.com/keyword-research"],
-    ["SEO", "https://example.com/on-page-seo"],
-    ["Building", "https://example.com/link-building"],
+    [["Search Engine"], "https://example.com/seo"],
+    [["Research"], "https://example.com/keyword-research"],
+    [["SEO"], "https://example.com/on-page-seo"],
+    [["Building"], "https://example.com/link-building"],
     # Add more keyword-link pairs as needed
 ]
 
