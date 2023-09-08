@@ -3,6 +3,9 @@ from nltk.tokenize import word_tokenize
 import re
 import random
 
+import nltk
+nltk.download('punkt')
+
 
 class PySeoHtml:
     def __init__(self, html_text, keywords, density=500, random_links=False):
