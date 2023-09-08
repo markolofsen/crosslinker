@@ -108,13 +108,13 @@ class PySeoHtml:
             while idx < len(words):
                 word = words[idx]
 
-                for keywords, link in self.keywords_groups:
+                for keyword, link in self.keywords_groups:
 
                     found = False
-                    for keyword in keywords:
-                        if word.lower().startswith(keyword):
-                            found = True
-                            break
+
+                    if word.lower().startswith(keyword.lower()):
+                        found = True
+                        print(f"found! word: {word}, keyword: {keyword}")
 
                     if found:
                         sentence_string = word
@@ -138,8 +138,8 @@ class PySeoHtml:
                             sentence_string += " " + words[right_idx]
                             right_idx += 1
 
-                        if len(sentence_string) > 4:
-                            sentences.append([sentence_string, link])
+                        # if len(sentence_string) > 3:
+                        sentences.append([sentence_string, link])
 
                         idx = right_idx
                         break
@@ -158,9 +158,10 @@ class PySeoHtml:
 
         # Initialize the link count
         link_count = 0
-
+        print(f"sentences: {sentences}")
         # Replace sentences in html_text with links, considering the maximum allowed number of links
         for sentence in sentences_to_replace:
+            print(f"sentence: {sentence}")
             if link_count >= max_links:
                 break  # Exit the loop if the maximum number of links is reached
             self.html_text = self.html_text.replace(
@@ -190,10 +191,11 @@ if "__main__" == __name__:
     """
 
     keywords = [
+        [["seo"], "https://example.com/seo"],
         [["Search Engine Optimization"], "https://example.com/seo"],
-        [["Keyword Research"], "https://example.com/keyword-research"],
-        [["On-Page SEO"], "https://example.com/on-page-seo"],
-        [["Link Building"], "https://example.com/link-building"],
+        # [["Keyword Research"], "https://example.com/keyword-research"],
+        # [["On-Page SEO"], "https://example.com/on-page-seo"],
+        # [["Link Building"], "https://example.com/link-building"],
         # Add more keyword-link pairs as needed
     ]
 
@@ -203,9 +205,9 @@ if "__main__" == __name__:
         keywords=keywords,
         density=500,
         random_links=False,
-        stemming=True,
+        stemming=False,
         language="english",
-        valid_tags=["p", "h1", "h2", "h3", "h4", "h5", "h6"],
+        valid_tags=["li", "p", "h1", "h2", "h3", "h4", "h5", "h6"],
     )
 
     # Generate the processed HTML content
