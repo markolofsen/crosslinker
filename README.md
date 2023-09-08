@@ -10,7 +10,7 @@ To get started, create an instance of the PySeoHtml class by providing the follo
 
 - `html_text` (str): The HTML text content you want to process.
 - `keywords` (dict): A dictionary where keys are the keywords you want to link, and values are the URLs to which the keywords should link.
-- `max_link_length` (int, optional): The maximum allowed length (in characters) for linked text snippets. Default is 500 characters.
+- `density` (int, optional): The maximum allowed length (in characters) for linked text snippets. Default is 500 characters.
 - `random_links` (bool, optional): If set to True, the library will randomly choose keywords to link each time. If False, it will link the same keywords consistently. Default is False.
 
 ### Text Processing
@@ -37,7 +37,7 @@ Extra spaces before punctuation marks are removed to maintain proper grammar and
 
 #### Link Limitation
 
-To prevent over-optimization and maintain content quality, the library removes excess `<a>` tags if there are more than one per 500 characters (configurable via `max_link_length`).
+To prevent over-optimization and maintain content quality, the library removes excess `<a>` tags if there are more than one per 500 characters (configurable via `density`).
 
 ### Randomization (Optional)
 
@@ -74,7 +74,7 @@ html_text = """
     <p>Python is a versatile programming language for SEO professionals.</p>
 """
 keywords = {"python": "https://python.org", "seo": "https://seo-example.com"}
-linker = PySeoHtml(html_text, keywords, max_link_length=500, random_links=False)
+linker = PySeoHtml(html_text, keywords, density=500, random_links=False)
 
 # Process the HTML text to add links to keywords
 processed_html = linker.process_text()

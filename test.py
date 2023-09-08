@@ -11,7 +11,7 @@ keywords = {
     # "roa": "https://road.com",
 }
 
-processor = PySeoHtml(html_text, keywords)
+processor = PySeoHtml(html_text, keywords, density=500)
 processed_text = processor.process_text()
 
 print('before', html_text)

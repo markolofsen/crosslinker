@@ -1,3 +1,17 @@
+Metadata-Version: 2.1
+Name: py-seo-html
+Version: 1.0.4
+Summary: Python library for SEO-friendly HTML text processing and keyword linking
+Home-page: https://github.com/markolofsen/py-seo-html
+Author: Mark
+Author-email: markolofsen@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/x-rst
+License-File: LICENSE
+
 ==============
 PySeoHtml
 ==============

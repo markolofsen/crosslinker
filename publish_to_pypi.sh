@@ -12,4 +12,5 @@ twine upload dist/*
 # Step 3: Clean up the temporary build files (optional)
 rm -rf build dist *.egg-info
 
+# Step 4: Push to github
 git add . && git commit -m 'auto commit' && git push
