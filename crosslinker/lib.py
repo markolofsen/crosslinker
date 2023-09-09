@@ -28,7 +28,7 @@ stemmer_languages = [
 ]
 
 
-class crosslinker:
+class CrossLinker:
     def __init__(self, html_text, keywords,
                  density=500,
                  random_links=False,
@@ -252,8 +252,8 @@ if "__main__" == __name__:
         # Add more keyword-link pairs as needed
     ]
 
-    # Initialize crosslinker
-    seo_html = crosslinker(
+    # Initialize CrossLinker
+    seo_html = CrossLinker(
         html_text=html_text,
         keywords=keywords,
         density=500,

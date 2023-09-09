@@ -66,7 +66,7 @@ CrossLinker offers several benefits for SEO:
 ### Here's an example of how to use the CrossLinker library:
 
 ```python
-from crosslinker import crosslinker
+from crosslinker import CrossLinker
 
 html_text = """
 <h1>Enhance Your SEO with CrossLinker</h1>
@@ -89,7 +89,7 @@ keywords = [
 ]
 
 # Initialize CrossLinker
-seo_html = crosslinker(
+seo_html = CrossLinker(
     html_text=html_text,
     keywords=keywords,
     density=100,

@@ -1,1 +1,1 @@
-from .lib import crosslinker
+from .lib import CrossLinker

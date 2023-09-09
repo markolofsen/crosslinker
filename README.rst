@@ -1,12 +1,12 @@
-.. _pyseohtml-documentation:
+.. _crosslinker-documentation:
 
-PySeoHtml Documentation
-=======================
+CrossLinker Documentation
+=========================
 
 Description
 -----------
 
-PySeoHtml is a Python library designed to intelligently link specific keywords within HTML text content. It enhances SEO (Search Engine Optimization) strategies by optimizing content with linked keywords, maintaining readability, and preventing over-optimization.
+CrossLinker is a Python library designed for intelligently linking specific keywords within HTML text content. It enhances SEO (Search Engine Optimization) strategies by optimizing content with linked keywords, maintaining readability, and preventing over-optimization.
 
 Table of Contents
 -----------------
@@ -25,11 +25,11 @@ Table of Contents
 Installation
 ------------
 
-To install PySeoHtml, you can use pip:
+To install CrossLinker, you can use pip:
 
 .. code-block:: bash
 
-    pip install py-seo-html
+    pip install crosslinker
 
 Text Processing
 ---------------
@@ -44,7 +44,7 @@ You can choose to place links randomly (if ``random_links`` is set to True), whi
 Initialization
 --------------
 
-To get started, create an instance of the PySeoHtml class by providing the following parameters:
+To get started, create an instance of the CrossLinker class by providing the following parameters:
 
 - ``html_text``: The HTML text content you want to process. (Required)
 - ``keywords``: A list of keyword-link pairs where each item is a list with the keyword and its associated link. (Required)
@@ -57,7 +57,7 @@ To get started, create an instance of the PySeoHtml class by providing the follo
 Benefits for SEO
 ----------------
 
-PySeoHtml offers several benefits for SEO:
+CrossLinker offers several benefits for SEO:
 
 - **Keyword Linking:** It automatically identifies and links keywords to relevant URLs within your HTML content, improving search engine understanding and rankings.
 - **Content Optimization:** By strategically linking keywords, you can enhance the SEO value of your content and increase its visibility in search results.
@@ -67,18 +67,18 @@ PySeoHtml offers several benefits for SEO:
 Usage
 -----
 
-Here's an example of how to use the PySeoHtml library:
+Here's an example of how to use the CrossLinker library:
 
 Example
 -------
 
 .. code-block:: python
 
-    from PySeoHtml import PySeoHtml
+    from crosslinker import CrossLinker
 
     html_text = """
-    <h1>Enhance Your SEO with PySeoHtml</h1>
-    <p>PySeoHtml is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve search engine rankings and increase organic traffic.</p>
+    <h1>Enhance Your SEO with CrossLinker</h1>
+    <p>CrossLinker is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve search engine rankings and increase organic traffic.</p>
     <p>Here are some examples of keywords you can link:</p>
     <ul>
         <li>Search Engine Optimization</li>
@@ -96,8 +96,8 @@ Example
         # Add more keyword-link pairs as needed
     ]
 
-    # Initialize PySeoHtml
-    seo_html = PySeoHtml(
+    # Initialize CrossLinker
+    seo_html = CrossLinker(
         html_text=html_text,
         keywords=keywords,
         density=100,
