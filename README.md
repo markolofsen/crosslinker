@@ -1,10 +1,10 @@
 
 
-# PySeoHtml Documentation
+# CrossLinker Documentation
 
 ## Description
 
-PySeoHtml is a Python library designed to intelligently link specific keywords within HTML text content. It enhances SEO (Search Engine Optimization) strategies by optimizing content with linked keywords, maintaining readability, and preventing over-optimization.
+CrossLinker is a Python library designed to intelligently link specific keywords within HTML text content. It enhances SEO (Search Engine Optimization) strategies by optimizing content with linked keywords, maintaining readability, and preventing over-optimization.
 
 ## Table of Contents
 
@@ -22,10 +22,10 @@ PySeoHtml is a Python library designed to intelligently link specific keywords w
 
 ## Installation
 
-To install PySeoHtml, you can use pip:
+To install CrossLinker, you can use pip:
 
 ```bash
-pip install py-seo-html
+pip install crosslinker
 ```
 
 ### Text Processing
@@ -38,7 +38,7 @@ You can choose to place links randomly (if `random_links` is set to True), which
 
 ### Initialization
 
-To get started, create an instance of the PySeoHtml class by providing the following parameters:
+To get started, create an instance of the CrossLinker class by providing the following parameters:
 
 | Parameter      | Description                                                                                         | Default Value   |
 |----------------|-----------------------------------------------------------------------------------------------------|-----------------|
@@ -55,7 +55,7 @@ To get started, create an instance of the PySeoHtml class by providing the follo
 You can choose to place links randomly (if random_links is set to True), which can help avoid over-optimization penalties from search engines.
 
 ### Benefits for SEO
-PySeoHtml offers several benefits for SEO:
+CrossLinker offers several benefits for SEO:
 
 * **Keyword Linking:** It automatically identifies and links keywords to relevant URLs within your HTML content, improving search engine understanding and rankings.
 * **Content Optimization:** By strategically linking keywords, you can enhance the SEO value of your content and increase its visibility in search results.
@@ -63,14 +63,14 @@ PySeoHtml offers several benefits for SEO:
 * **Maintains Readability:** Linked keywords are embedded within readable text snippets, improving the user experience and preventing content from appearing spammy.
 
 ## Usage
-### Here's an example of how to use the PySeoHtml library:
+### Here's an example of how to use the CrossLinker library:
 
 ```python
-from PySeoHtml import PySeoHtml
+from crosslinker import crosslinker
 
 html_text = """
-<h1>Enhance Your SEO with PySeoHtml</h1>
-<p>PySeoHtml is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve search engine rankings and increase organic traffic.</p>
+<h1>Enhance Your SEO with CrossLinker</h1>
+<p>CrossLinker is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve search engine rankings and increase organic traffic.</p>
 <p>Here are some examples of keywords you can link:</p>
 <ul>
     <li>Search Engine Optimization</li>
@@ -88,8 +88,8 @@ keywords = [
     # Add more keyword-link pairs as needed
 ]
 
-# Initialize PySeoHtml
-seo_html = PySeoHtml(
+# Initialize CrossLinker
+seo_html = crosslinker(
     html_text=html_text,
     keywords=keywords,
     density=100,
@@ -110,10 +110,10 @@ The processed_html variable will contain the HTML content with keywords replaced
 
 ```html
 <h1>
- Enhance Your SEO with PySeoHtml
+ Enhance Your SEO with CrossLinker
 </h1>
 <p>
- PySeoHtml is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve
+ CrossLinker is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve
  <a href="https://example.com/seo">
   search engine rankings and increase organic traffic
  </a>

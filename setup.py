@@ -4,14 +4,14 @@ with open("README.rst", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='py-seo-html',
-    version='1.2.1',
-    description="Python library for SEO-friendly HTML text processing and keyword linking",
+    name='crosslinker',
+    version='0.0.1',
+    description="CrossLinker: A Python Library for SEO - Friendly HTML Text Processing and Keyword Linking",
     long_description=long_description,
     long_description_content_type="text/x-rst",
     author='Mark',
     author_email='markolofsen@gmail.com',
-    url='https://github.com/markolofsen/py-seo-html',
+    url='https://github.com/markolofsen/crosslinker',
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -24,5 +24,5 @@ setup(
         'nltk',
     ],
     # package_dir={'': 'py-seo-html'},
-    py_modules=['PySeoHtml'],
+    py_modules=['crosslinker'],
 )
