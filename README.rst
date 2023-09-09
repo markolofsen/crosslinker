@@ -1,4 +1,4 @@
-.. _CrossLinker-documentation:
+.. _crosslinker-documentation:
 
 CrossLinker Documentation
 =======================
