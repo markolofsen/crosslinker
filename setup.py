@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 setup(
     name='crosslinker',
-    version='0.0.2',
+    version='0.0.3',
     description="CrossLinker: A Python Library for SEO - Friendly HTML Text Processing and Keyword Linking",
     long_description=long_description,
     long_description_content_type="text/x-rst",

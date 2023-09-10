@@ -61,6 +61,9 @@ class CrossLinker:
         keywords_groups = []
         for group, link in keywords:
             for keyword in group:
+                if len(keyword) < 2:
+                    continue
+
                 if stemming:
                     keyword = self.stemmer.stem(keyword)
                 keywords_groups.append([keyword, link])
@@ -106,7 +109,8 @@ class CrossLinker:
                 inside_valid_tag = True
 
             # Tokenize the text into words
-            words = word_tokenize(text_node)
+            # words = word_tokenize(text_node, language=self.language)
+            words = text_node.split()
 
             idx = 0
             while idx < len(words):
@@ -129,6 +133,16 @@ class CrossLinker:
                         while left_idx >= left_limit:
                             if re.match(r'\W', words[left_idx]):
                                 break
+
+                            # Stop when encountering a colon
+                            is_colon = False
+                            for char in [".", ",", "!", "?", ":", ";"]:
+                                if char in words[left_idx]:
+                                    is_colon = True
+                                    break
+                            if is_colon:
+                                break
+
                             sentence_string = words[left_idx] + \
                                 " " + sentence_string
                             left_idx -= 1
@@ -139,12 +153,21 @@ class CrossLinker:
                         while right_idx < right_limit:
                             if re.match(r'\W', words[right_idx]):
                                 break
+
+                            # Stop when encountering a colon
+                            is_colon = False
+                            for char in [".", ",", "!", "?", ":", ";"]:
+                                if char in words[right_idx - 1]:
+                                    is_colon = True
+                                    break
+                            if is_colon:
+                                break
+
                             sentence_string += " " + words[right_idx]
                             right_idx += 1
 
-                        if len(sentence_string) > 2:
-                            sentence_string = sentence_string.strip()
-                            sentences.append([sentence_string, link])
+                        sentence_string = sentence_string.strip()
+                        sentences.append([sentence_string, link])
 
                         idx = right_idx
                         break
@@ -236,7 +259,7 @@ if "__main__" == __name__:
     <p>PySeoHtml is a powerful Python library that can help boost your website's SEO performance. By intelligently linking specific keywords within your content, you can improve search engine rankings and increase organic traffic.</p>
     <p>Here are some examples of keywords you can link:</p>
     <ul>
-        <li>Search Engine Optimization here. And some more text</li>
+        <li>Welcome. Search Engine's Optimization's here! And some more text</li>
         <li>Keyword Research</li>
         <li>On-Page SEO</li>
         <li>Link Building</li>
@@ -245,7 +268,7 @@ if "__main__" == __name__:
 
     keywords = [
         # [["seo"], "https://example.com/seo"],
-        [["Search"], "https://example.com/seo"],
+        [["search"], "https://example.com/seo"],
         # [["Keyword Research"], "https://example.com/keyword-research"],
         # [["On-Page SEO"], "https://example.com/on-page-seo"],
         # [["Link Building"], "https://example.com/link-building"],
@@ -257,7 +280,7 @@ if "__main__" == __name__:
         html_text=html_text,
         keywords=keywords,
         density=500,
-        random_links=True,
+        random_links=False,
         stemming=False,
         language="english",
         valid_tags=["li", "p", "h1", "h2", "h3", "h4", "h5", "h6"],
